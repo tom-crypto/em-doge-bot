@@ -6,10 +6,15 @@ provider:
   runtime: nodejs12.x
   stage: dev  # once this is working, you can do production
 
+  custom:
+    secret: ${ssm:/aws/reference/secretsmanager/dev/doge-bot-bearer-token~true}
+        
+  environment:
+    token: ${self:provider.custom.secret.doge-bot-bearer-token}
+
 functions:
   cron:
     handler: handler.run
     events:
       # Invoke Lambda function every minute
-      - schedule: rate(1 minute)
-  
+      - schedule: rate(10 minutes)
