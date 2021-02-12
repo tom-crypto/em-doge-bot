@@ -1,0 +1,15 @@
+service: em-doge-bot
+
+provider:
+  name: aws
+  profile: default
+  runtime: nodejs12.x
+  stage: dev  # once this is working, you can do production
+
+functions:
+  cron:
+    handler: handler.run
+    events:
+      # Invoke Lambda function every minute
+      - schedule: rate(1 minute)
+  
