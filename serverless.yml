@@ -8,13 +8,15 @@ provider:
 
   custom:
     secret: ${ssm:/aws/reference/secretsmanager/dev/doge-bot-bearer-token~true}
-        
+    #Loaded in secret twitter key from SSM
+
   environment:
     token: ${self:provider.custom.secret.doge-bot-bearer-token}
+    #Implementing an environment variable called 'token'
 
 functions:
   cron:
     handler: handler.run
     events:
-      # Invoke Lambda function every minute
+      # Invoke Lambda function every 10 minutes
       - schedule: rate(10 minutes)

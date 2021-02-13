@@ -1,4 +1,15 @@
 const axios = require('axios');
+const AWS = require('aws-sdk');
+
+var SNS = new AWS.SNS()
+
+const sendTextMsg = async (number, message) => {
+  const response = await SNS.publish({
+    PhoneNumber: number,
+    Message: message
+  }).promise();
+  console.log(response);
+  }
 
 module.exports.run = async (event, context) => {
   const time = new Date();
@@ -10,40 +21,27 @@ module.exports.run = async (event, context) => {
   response = await axios.get(`https://api.twitter.com/2/users/${elonUserId}/tweets?tweet.fields=created_at`, config);
   
   for (const tweet of response.data.data) {
-    //console.log('LINE 13', new Date(tweet.created_at))
-    if (doesNewTweetExist(time, new Date(tweet.created_at))) {
-      // if doge match
-      continue
-      // then send email via ses
+    if (newTweetExists(time, new Date(tweet.created_at))) {
+      if (tweetContainsDoge(tweet.text)) {
+        sendTextMsg('+16306490898','Doge alert!')
+      }
     }
-    else {
-      doesTweetContainDoge(tweet.text)
-    }
-  }
-};
+  };
 
 
-function doesNewTweetExist(dt2, dt1){
+function newTweetExists(dt2, dt1){
   var diff =(dt2.getTime() - dt1.getTime()) / 1000;
   diff /= 60;
   minutes = Math.abs(Math.round(diff));
-  if (minutes <= 10){
-    return true
-  }
-  else {
-    return false
-  }
-  };
+  return minutes <= 10
+};
 
-// const test =  new Date("2021-02-12T10:15:48.000Z")
-// const time = new Date();
 
-// console.log(doesNewTweetExist(time, test));
-
-function doesTweetContainDoge(t) {
+function tweetContainsDoge(t) {
   const regex = new RegExp(/doge|oge/gi);
   let dogeExists = regex.test(t);
   console.log(dogeExists)
   return dogeExists
+  };
 
-}
+};
