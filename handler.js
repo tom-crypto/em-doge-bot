@@ -23,7 +23,7 @@ module.exports.run = async (event, context) => {
   for (const tweet of response.data.data) {
     if (newTweetExists(time, new Date(tweet.created_at))) {
       if (tweetContainsDoge(tweet.text)) {
-        sendTextMsg('+16306490898','Doge alert!')
+        sendTextMsg('process.env.MY_PHONE_NUMBER','Doge alert!')
       }
     }
   };
