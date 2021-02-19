@@ -10,3 +10,5 @@ I built this project using the Serverless framework for AWS.
 
 The entire function runs on AWS Lambda (handler.js). handler.js is subscribed to a cron trigger that publishes every 10 minutes. At 10 minutes, the Lambda function is triggered and makes a call to Elon Musk's twitter handle via the Twitter API. We then search for any new tweets in the last 10 minutes. If, new tweets are found we REGEX for Doge. If, Doge is matched we send an alert to the end-user via AWS SNS.
 
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
