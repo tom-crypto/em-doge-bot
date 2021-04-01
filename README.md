@@ -2,7 +2,7 @@
 
 Em-doge-bot is a shot hobby project I made to send me SMS alerts. 
 
-Elon Musk loves to tweet favorably about Dogecoin, and every time he does, the market responds with a surge of purchase orders. In an effort to profit off of this hilarious phenomenon I have built a program to send me text messages every time Elon tweets about Dogecoin. When I recieve a notification, I buy small amount of Doge and sell it moments later for a quick profit.
+Elon Musk loves to tweet favorably about Dogecoin, and every time he does, the market responds with a surge of purchase orders. In an effort to profit off of this hilarious phenomenon I have built a program to send me text messages every time Elon tweets about Dogecoin. When I receive a notification, I buy small amount of Doge and sell it moments later for a quick profit.
 
 I built this project using the Serverless framework for AWS.
 
